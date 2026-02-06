@@ -1,0 +1,6 @@
+asset_id,type,location
+PV-01,Pressure Vessel,Zone A
+HE-01,Heat Exchanger,Zone A
+ST-01,Storage Tank,Zone A
+PN-01,Piping,Zone A
+RE-01,Rotating Eq,Zone A
