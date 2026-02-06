@@ -1,0 +1,150 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+    /* "Dusty" Industrial Palette */
+    --bg-color: #ffffff;
+    --text-color: #000000;
+    --border-color: #000000;
+
+    --accent-yellow: #FFD700;
+    /* Warnings / Action */
+    --accent-red: #FF4444;
+    /* Critical */
+    --accent-blue: #4444FF;
+    /* Info / Stable */
+    --accent-green: #00CC00;
+    /* Safe */
+
+    --border-width: 3px;
+    --shadow-offset: 4px;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Courier New', Courier, monospace;
+    /* Monospaced for industrial feel or Roboto/Inter if preferred, keeping it rigorous */
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    -webkit-font-smoothing: antialiased;
+}
+
+/* Typography */
+h1,
+h2,
+h3,
+h4,
+h5 {
+    text-transform: uppercase;
+    font-weight: 900;
+    letter-spacing: -0.5px;
+}
+
+button {
+    font-family: inherit;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+    border: var(--border-width) solid var(--border-color);
+    background: white;
+    box-shadow: var(--shadow-offset) var(--shadow-offset) 0px var(--border-color);
+    transition: transform 0.1s;
+}
+
+button:active {
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0px var(--border-color);
+}
+
+/* Utilities */
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.box {
+    border: var(--border-width) solid var(--border-color);
+    padding: 20px;
+    background: white;
+    box-shadow: var(--shadow-offset) var(--shadow-offset) 0px var(--border-color);
+}
+
+.flex {
+    display: flex;
+}
+
+.flex-col {
+    display: flex;
+    flex-direction: column;
+}
+
+.justify-between {
+    justify-content: space-between;
+}
+
+.items-center {
+    align-items: center;
+}
+
+.gap-4 {
+    gap: 1rem;
+}
+
+.gap-8 {
+    gap: 2rem;
+}
+
+.grid {
+    display: grid;
+}
+
+.w-full {
+    width: 100%;
+}
+
+.h-full {
+    height: 100%;
+}
+
+.text-lg {
+    font-size: 1.125rem;
+}
+
+.text-xl {
+    font-size: 1.25rem;
+}
+
+.text-4xl {
+    font-size: 2.25rem;
+}
+
+.font-bold {
+    font-weight: bold;
+}
+
+/* Status Colors */
+.bg-yellow {
+    background-color: var(--accent-yellow);
+}
+
+.bg-red {
+    background-color: var(--accent-red);
+    color: white;
+}
+
+.bg-blue {
+    background-color: var(--accent-blue);
+    color: white;
+}
+
+.bg-green {
+    background-color: var(--accent-green);
+    color: white;
+}
