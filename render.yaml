@@ -1,0 +1,23 @@
+services:
+  - type: web
+    name: spark-backend
+    env: python
+    region: oregon
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn wsgi:app
+    envVars:
+      - key: DEV_AUTH_ENABLED
+        value: "true"
+      - key: DEV_AUTH_USER
+        value: "admin@spark.com"
+      - key: DEV_AUTH_PASS
+        value: "admin123"
+      - key: DEV_AUTH_SECRET
+        generateValue: true
+      - key: DATABASE_URL
+        sync: false
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: KIRI_API_KEY
+        sync: false
