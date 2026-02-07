@@ -5,11 +5,14 @@ from flask import request, jsonify
 from .dev_auth import DEV_AUTH_ENABLED, verify_token as verify_dev_token
 
 SUPABASE_JWT_SECRET = os.getenv('SUPABASE_JWT_SECRET')
+DEMO_PUBLIC = os.getenv('DEMO_PUBLIC', 'false').lower() == 'true'
 
 
 def require_auth(fn):
     @wraps(fn)
     def wrapper(*args, **kwargs):
+        if DEMO_PUBLIC:
+            return fn(*args, **kwargs)
         auth_header = request.headers.get('Authorization', '')
         if not auth_header.startswith('Bearer '):
             return jsonify({"error": "Missing bearer token"}), 401

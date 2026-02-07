@@ -15,6 +15,8 @@ services:
         value: "admin123"
       - key: DEV_AUTH_SECRET
         generateValue: true
+      - key: DEMO_PUBLIC
+        value: "true"
       - key: DATABASE_URL
         sync: false
       - key: GEMINI_API_KEY
