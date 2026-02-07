@@ -3,9 +3,9 @@ services:
     name: spark-backend
     env: python
     region: oregon
-    rootDir: backend
+    rootDir: .
     buildCommand: pip install -r requirements.txt
-    startCommand: gunicorn wsgi:app
+    startCommand: gunicorn backend.wsgi:app
     envVars:
       - key: DEV_AUTH_ENABLED
         value: "true"
