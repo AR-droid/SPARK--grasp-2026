@@ -17,13 +17,7 @@ export const RiskBadge = ({ level }) => {
     );
 };
 
-export const AssetTable = () => {
-    const assets = [
-        { id: 'PV-12', name: 'Pressure Vessel 12', type: 'Pressure Vessel', risk: 'High', status: 'Corrosion' },
-        { id: 'PIPE-07', name: 'Main Feeder Pipe', type: 'Piping', risk: 'Medium', status: 'Vibration' },
-        { id: 'PUMP-03', name: 'Feed Pump A', type: 'Rotating', risk: 'Low', status: 'Stable' },
-        { id: 'TANK-09', name: 'Storage Tank 9', type: 'Storage', risk: 'High', status: 'Leak Detected' },
-    ];
+export const AssetTable = ({ assets = [] }) => {
 
     return (
         <div className="box w-full overflow-x-auto">
@@ -55,10 +49,12 @@ export const AssetTable = () => {
                             <td className="p-4 font-mono font-bold">{asset.id}</td>
                             <td className="p-4 font-mono text-sm">{asset.type}</td>
                             <td className="p-4">
-                                <RiskBadge level={asset.risk} />
+                                <td className="p-4">
+                                    <RiskBadge level={asset.risk_level} />
+                                </td>
                             </td>
                             <td className="p-4 font-bold text-sm uppercase">
-                                {asset.status}
+                                {asset.risk_level === 'High' ? 'Critical' : 'Stable'}
                             </td>
                             <td className="p-4 text-right">
                                 <a href={`/asset/${asset.id}`}>

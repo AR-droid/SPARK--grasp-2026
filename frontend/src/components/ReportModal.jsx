@@ -1,7 +1,20 @@
 import React from 'react';
+import { ReportService } from '../services/api';
 
 const ReportModal = ({ isOpen, onClose, assetId }) => {
     if (!isOpen) return null;
+
+    const handleGenerate = async () => {
+        const blob = await ReportService.downloadAssetReport(assetId);
+        const url = window.URL.createObjectURL(new Blob([blob]));
+        const link = document.createElement('a');
+        link.href = url;
+        link.setAttribute('download', `SPARK_Report_${assetId}.pdf`);
+        document.body.appendChild(link);
+        link.click();
+        link.parentNode.removeChild(link);
+        onClose();
+    };
 
     return (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
@@ -52,8 +65,8 @@ const ReportModal = ({ isOpen, onClose, assetId }) => {
                     <button onClick={onClose} className="flex-1 py-3 border-2 border-black font-bold hover:bg-gray-100">
                         CANCEL
                     </button>
-                    <button className="flex-1 py-3 bg-red-600 text-white border-2 border-black hover:bg-red-700 shadow-[4px_4px_0px_0px_black]">
-                        GENERATE PDF
+                    <button onClick={handleGenerate} className="flex-1 py-3 bg-red-600 text-white border-2 border-black hover:bg-red-700 shadow-[4px_4px_0px_0px_black]">
+                        GENERATE REPORT
                     </button>
                 </div>
             </div>

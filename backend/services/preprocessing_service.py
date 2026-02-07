@@ -1,5 +1,6 @@
 import pandas as pd
 import numpy as np
+from datetime import datetime, timedelta
 
 class PreprocessingService:
     def __init__(self):
@@ -99,3 +100,19 @@ class PreprocessingService:
                 df[col] = 0.0 # Handle flatline case
                 
         return df
+
+    def convert_seconds_to_timestamp(self, seconds, base_time=None, start_time=None):
+        """
+        Converts seconds offset to a timestamp.
+        If start_time is provided (ISO string), use it as base.
+        If base_time is provided (datetime), use it as base.
+        Otherwise default to current UTC time as base.
+        """
+        if start_time:
+            base = pd.to_datetime(start_time)
+        elif base_time:
+            base = base_time
+        else:
+            base = datetime.utcnow()
+
+        return base + timedelta(seconds=float(seconds))

@@ -1,16 +1,45 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { supabase } from '../services/supabase';
+import { api } from '../services/api';
 
 const LoginPage = () => {
     const navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [error, setError] = useState('');
+    const [loading, setLoading] = useState(false);
 
-    const handleLogin = (e) => {
+    const handleLogin = async (e) => {
         e.preventDefault();
-        // Mock Authentication
-        console.log("Logging in with:", email, password);
-        navigate('/dashboard');
+        setError('');
+        setLoading(true);
+        if (import.meta.env.VITE_USE_DEV_AUTH === 'true') {
+            try {
+                const res = await api.post('/auth/login', {
+                    username: email,
+                    password
+                });
+                localStorage.setItem('dev_token', res.data.token);
+                setLoading(false);
+                navigate('/projects');
+            } catch (err) {
+                setLoading(false);
+                setError(err.response?.data?.error || 'Login failed');
+            }
+        } else {
+            const { error: authError } = await supabase.auth.signInWithPassword({
+                email,
+                password,
+            });
+            setLoading(false);
+
+            if (authError) {
+                setError(authError.message);
+                return;
+            }
+            navigate('/projects');
+        }
     };
 
     return (
@@ -60,12 +89,16 @@ const LoginPage = () => {
                         type="submit"
                         className="w-full bg-black text-white py-4 font-black uppercase tracking-widest hover:bg-gray-800 transition-transform active:scale-[0.98]"
                     >
-                        Access Console &rarr;
+                        {loading ? 'Signing in...' : 'Access Console →'}
                     </button>
                 </form>
 
+                {error && (
+                    <div className="mt-4 text-red-600 text-sm font-mono">{error}</div>
+                )}
+
                 <div className="mt-6 flex justify-between text-xs font-bold uppercase text-gray-500 font-mono">
-                    <a href="#" className="hover:text-black underline">Forgot Creds?</a>
+                    <a href="/signup" className="hover:text-black underline">Create Account</a>
                     <a href="#" className="hover:text-black underline">Request Access</a>
                 </div>
             </div>

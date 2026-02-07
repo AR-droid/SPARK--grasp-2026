@@ -1,8 +1,9 @@
 import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useInRouterContext, useLocation } from 'react-router-dom';
 
 const Layout = ({ children }) => {
-    const location = useLocation();
+    const inRouter = useInRouterContext();
+    const location = inRouter ? useLocation() : { pathname: '/' };
 
     return (
         <div className="min-h-screen flex flex-col">

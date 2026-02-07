@@ -1,0 +1,9 @@
+{
+  "pressure_vessel": "pressure_vessel_drawing_question.glb",
+  "heat_exchanger": "heat_exchanger.glb",
+  "storage_tank": "chemical_tank.glb",
+  "piping_network": "piping_system.glb",
+  "pump": "centrifugal_pump__bomba_centrifuga.glb",
+  "motor": "electric_motor.glb",
+  "compressor": "air_compressor.glb"
+}

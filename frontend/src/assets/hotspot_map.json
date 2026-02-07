@@ -1,0 +1,117 @@
+{
+  "pressure_vessel": [
+    {
+      "component": "shell",
+      "risk": ["corrosion", "overpressure", "fatigue"],
+      "data": ["pressure", "temperature", "wall_thickness"],
+      "visual": "gradient heatmap + thickness shrink",
+      "explain": "Hoop stress rose above baseline"
+    },
+    {
+      "component": "weld_seam",
+      "risk": ["fatigue_crack"],
+      "data": ["pressure_cycles", "inspection_crack_notes"],
+      "visual": "red seam lines + crack markers",
+      "explain": "Repeated pressure cycling concentrates seam stress"
+    },
+    {
+      "component": "nozzle",
+      "risk": ["leak", "local_stress"],
+      "data": ["pressure_spikes", "acoustic_anomaly"],
+      "visual": "pulsing ring around nozzle",
+      "explain": "Spikes amplify stress at discontinuities"
+    }
+  ],
+  "heat_exchanger": [
+    {
+      "component": "tube_bundle",
+      "risk": ["fouling", "corrosion", "tube_rupture"],
+      "data": ["temperature_delta", "flow_rate"],
+      "visual": "tubes fade amber to red",
+      "explain": "ΔT drop indicates fouling buildup"
+    },
+    {
+      "component": "tube_sheet",
+      "risk": ["thermal_fatigue", "leakage"],
+      "data": ["temperature_cycles", "inspection_notes"],
+      "visual": "localized red disc",
+      "explain": "Thermal mismatch stresses tube-sheet"
+    },
+    {
+      "component": "shell_nozzles",
+      "risk": ["erosion"],
+      "data": ["flow_velocity", "vibration"],
+      "visual": "arrow overlays with heat intensity",
+      "explain": "High velocity accelerates erosion"
+    }
+  ],
+  "storage_tank": [
+    {
+      "component": "bottom_plate",
+      "risk": ["corrosion", "leakage"],
+      "data": ["thickness", "moisture"],
+      "visual": "bottom glowing red",
+      "explain": "Water settles and accelerates corrosion"
+    },
+    {
+      "component": "roof_seal",
+      "risk": ["seal_failure", "vapor_leak"],
+      "data": ["pressure", "inspection_notes"],
+      "visual": "amber ring at roof",
+      "explain": "Seal degradation increases vapor loss"
+    },
+    {
+      "component": "nozzles",
+      "risk": ["leak", "stress_crack"],
+      "data": ["pressure", "acoustic"],
+      "visual": "red halos at nozzles",
+      "explain": "Localized stress at nozzle joints"
+    }
+  ],
+  "piping_network": [
+    {
+      "component": "elbows",
+      "risk": ["erosion", "vibration"],
+      "data": ["flow_rate", "pressure_drop", "acoustic"],
+      "visual": "red zones at bends",
+      "explain": "Turbulence accelerates wear"
+    },
+    {
+      "component": "flanges",
+      "risk": ["gasket_failure"],
+      "data": ["pressure_cycles", "acoustic"],
+      "visual": "red halo at flange",
+      "explain": "Cycles loosen gasket preload"
+    },
+    {
+      "component": "control_valves",
+      "risk": ["cavitation", "seat_wear"],
+      "data": ["pressure_drop", "acoustic"],
+      "visual": "pulsing valve body",
+      "explain": "High ΔP + noise indicates cavitation"
+    }
+  ],
+  "rotating_equipment": [
+    {
+      "component": "bearings",
+      "risk": ["bearing_failure", "overheating"],
+      "data": ["vibration", "temperature", "audio"],
+      "visual": "rapid blink at bearing housings",
+      "explain": "HF vibration matches bearing wear"
+    },
+    {
+      "component": "shaft",
+      "risk": ["misalignment", "fatigue"],
+      "data": ["vibration", "rpm"],
+      "visual": "oscillating shaft highlight",
+      "explain": "Spectrum indicates misalignment"
+    },
+    {
+      "component": "seal",
+      "risk": ["leak"],
+      "data": ["temperature", "acoustic"],
+      "visual": "red mist at seal",
+      "explain": "Acoustic hiss indicates leakage"
+    }
+  ]
+}

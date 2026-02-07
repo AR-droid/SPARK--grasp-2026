@@ -1,0 +1,13 @@
+flask
+flask-cors
+flask-sqlalchemy
+pandas
+numpy
+scikit-learn
+statsmodels
+tensorflow
+reportlab
+psycopg2-binary
+python-dotenv
+alembic
+pyjwt
