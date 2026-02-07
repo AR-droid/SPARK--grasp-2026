@@ -28,6 +28,11 @@ const LoginPage = () => {
                 setError(err.response?.data?.error || 'Login failed');
             }
         } else {
+            if (!supabase) {
+                setLoading(false);
+                setError('Supabase is not configured. Set VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY or enable DEV auth.');
+                return;
+            }
             const { error: authError } = await supabase.auth.signInWithPassword({
                 email,
                 password,

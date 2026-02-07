@@ -1,6 +1,11 @@
 venv/
 __pycache__/
 *.pyc
+.DS_Store
+.env
+instance/
+backend/instance/
+temp_*.jpg
+temp_*.png
 
-audio_fault_model.joblib
 data/

@@ -18,6 +18,12 @@ export const AuthProvider = ({ children }) => {
             return;
         }
 
+        if (!supabase) {
+            setSession(null);
+            setLoading(false);
+            return;
+        }
+
         supabase.auth.getSession().then(({ data }) => {
             setSession(data.session);
             setLoading(false);

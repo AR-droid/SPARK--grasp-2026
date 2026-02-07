@@ -1,6 +1,10 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:5001/api';
+const API_BASE =
+    import.meta.env.VITE_API_URL ||
+    (typeof window !== 'undefined' ? `${window.location.origin}` : 'http://localhost:5001');
+
+const API_URL = API_BASE.endsWith('/api') ? API_BASE : `${API_BASE}/api`;
 
 export const api = axios.create({
     baseURL: API_URL,
@@ -14,8 +18,11 @@ api.interceptors.request.use(async (config) => {
     if (import.meta.env.VITE_USE_DEV_AUTH === 'true') {
         token = localStorage.getItem('dev_token');
     } else {
-        const { data } = await import('./supabase.js').then(mod => mod.supabase.auth.getSession());
-        token = data?.session?.access_token;
+        const { supabase } = await import('./supabase.js');
+        if (supabase) {
+            const { data } = await supabase.auth.getSession();
+            token = data?.session?.access_token;
+        }
     }
     if (token) {
         config.headers.Authorization = `Bearer ${token}`;
