@@ -10,32 +10,10 @@ export const AuthProvider = ({ children }) => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        const useDevAuth = import.meta.env.VITE_USE_DEV_AUTH === 'true';
-        if (useDevAuth) {
-            const token = localStorage.getItem('dev_token');
-            setSession(token ? { user: { email: 'dev' } } : null);
-            setLoading(false);
-            return;
-        }
-
-        if (!supabase) {
-            setSession(null);
-            setLoading(false);
-            return;
-        }
-
-        supabase.auth.getSession().then(({ data }) => {
-            setSession(data.session);
-            setLoading(false);
-        });
-
-        const { data: listener } = supabase.auth.onAuthStateChange((_event, newSession) => {
-            setSession(newSession);
-        });
-
-        return () => {
-            listener?.subscription?.unsubscribe();
-        };
+        // Demo mode: auth disabled. Always allow session.
+        setSession({ user: { email: 'demo' } });
+        setLoading(false);
+        return;
     }, []);
 
     const value = { session, loading };
